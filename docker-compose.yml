@@ -1,0 +1,57 @@
+version: "3.8"
+services:
+  movies:
+    # build: ./movies
+    build:
+      context: ./movies
+      dockerfile: Dockerfile
+    # networks: 
+    #   mongoNetwork: {}
+    container_name: movies-service
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+  users:
+    # build: ./users
+    build:
+      context: ./users
+      dockerfile: Dockerfile
+    # networks: 
+    #   mongoNetwork: {}
+    container_name: users-service
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+  website:
+    # build: ./website
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    command:
+      - "-usersAPI"
+      - "http://users:3000/api/users/"
+      - "-moviesAPI"
+      - "http://movies:3000/api/movies/"
+    # networks: 
+    #   mongoNetwork: {}
+    ports: 
+      - "8000:8000"
+    container_name: website-service
+
+  db:
+    image: mongo:latest
+    # networks:
+    #   mongoNetwork: {}
+    container_name: mongodb
+    # ports:
+    #   - target: 27017
+    #     published: 27017
+    #     protocol: tcp
+    #     mode: host
+    volumes:
+      - ./backup:/backup
+      - ./mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
+networks:
+  mongoNetwork:
+    driver: bridge
+    name: mongoNetwork
