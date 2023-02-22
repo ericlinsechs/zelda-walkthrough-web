@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ericlinsechs/go-mongodb-microservices/Armors/pkg/models"
+	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

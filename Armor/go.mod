@@ -3,7 +3,6 @@ module github.com/ericlinsechs/zelda-walkthrough-web/armor
 go 1.19
 
 require (
-	github.com/ericlinsechs/go-mongodb-microservices/movies v0.0.0-20230221131256-2a02bdc481b3
 	github.com/gin-gonic/gin v1.8.2
 	go.mongodb.org/mongo-driver v1.11.2
 )

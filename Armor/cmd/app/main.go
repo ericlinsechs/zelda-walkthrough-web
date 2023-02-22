@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/ericlinsechs/go-mongodb-microservices/movies/pkg/models/mongodb"
+	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models/mongodb"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -25,7 +25,7 @@ func main() {
 	// Define command-line flags
 	serverAddr := flag.String("serverAddr", "", "HTTP server network address")
 	serverPort := flag.Int("serverPort", 3000, "HTTP server network port")
-	mongoDatabase := flag.String("mongoDatabase", "movies", "Database name")
+	mongoDatabase := flag.String("mongoDatabase", "armor", "Database name")
 	mongoURI := flag.String("mongoURI", "mongodb://localhost:27017", "Database hostname url")
 	// enableCredentials := flag.Bool("enableCredentials", false, "Enable the use of credentials for mongo connection")
 	flag.Parse()
@@ -80,7 +80,7 @@ func main() {
 	app := &application{
 		infoLog:  infoLog,
 		errorLog: errorLog,
-		armors: &mongodb.ArmorModel{
+		armor: &mongodb.ArmorModel{
 			Collection: client.Database(*mongoDatabase).Collection("armor"),
 		},
 	}

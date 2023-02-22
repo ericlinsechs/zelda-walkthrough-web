@@ -6,9 +6,9 @@ import (
 
 type Armor struct {
 	ID           primitive.ObjectID `bson:"_id,omitempty"`
-	Ｎame         string             `bson:"name,omitempty"`
+	Name         string             `bson:"name"`
 	Location     string             `bson:"location,omitempty"`
-	Cost         int                `bson:"cost,omitempty"`
+	Cost         uint               `bson:"cost,omitempty"`
 	Uses         string             `bson:"uses,omitempty"`
 	LastTimeEdit string             `bson:"lasttimeedit,omitempty"`
 }

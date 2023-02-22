@@ -5,26 +5,26 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ericlinsechs/go-mongodb-microservices/movies/pkg/models"
+	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
 )
 
 func (app *application) getAll(c *gin.Context) {
-	movies, err := app.movies.All()
+	armor, err := app.armor.All()
 	if err != nil {
 		app.serverError(c, err)
 	}
 	app.infoLog.Println("Users have been listed")
 
 	// Send response
-	c.JSON(http.StatusOK, movies)
+	c.JSON(http.StatusOK, armor)
 }
 
 func (app *application) findByID(c *gin.Context) {
 	// Get id from incoming url
 	id := c.Param("id")
 
-	movie, err := app.movies.FindByID(id)
+	movie, err := app.armor.FindByID(id)
 	if err != nil {
 		if err.Error() == "ErrNoDocuments" {
 			app.clientError(c, http.StatusBadRequest)
@@ -41,22 +41,22 @@ func (app *application) findByID(c *gin.Context) {
 }
 
 func (app *application) create(c *gin.Context) {
-	newMovie := new(models.Movie)
+	newArmor := new(models.Armor)
 
-	err := json.NewDecoder(c.Request.Body).Decode(&newMovie)
+	err := json.NewDecoder(c.Request.Body).Decode(&newArmor)
 	if err != nil {
 		app.serverError(c, err)
 	}
 
-	newMovie.ReleaseTime = time.Now().Format(time.UnixDate)
+	newArmor.LastTimeEdit = time.Now().Format(time.UnixDate)
 
 	// Insert new user
-	insertResult, err := app.movies.Insert(newMovie)
+	insertResult, err := app.armor.Insert(newArmor)
 	if err != nil {
 		app.serverError(c, err)
 	}
 
-	app.infoLog.Printf("New movie have been created, %s", insertResult.InsertedID)
+	app.infoLog.Printf("New armor have been created, %s", insertResult.InsertedID)
 
 	// Send response back
 	// c.JSON(http.StatusOK, users)
@@ -67,10 +67,10 @@ func (app *application) delete(c *gin.Context) {
 	id := c.Param("id")
 
 	// Delete user by id
-	deleteResult, err := app.movies.Delete(id)
+	deleteResult, err := app.armor.Delete(id)
 	if err != nil {
 		app.serverError(c, err)
 	}
 
-	app.infoLog.Printf("%d movie(s) have been eliminated", deleteResult.DeletedCount)
+	app.infoLog.Printf("%d armor(s) have been eliminated", deleteResult.DeletedCount)
 }
