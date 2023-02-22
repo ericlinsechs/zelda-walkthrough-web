@@ -11,17 +11,6 @@ services:
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
-  users:
-    # build: ./users
-    build:
-      context: ./users
-      dockerfile: Dockerfile
-    # networks: 
-    #   mongoNetwork: {}
-    container_name: users-service
-    command:
-      - "-mongoURI"
-      - "mongodb://db:27017/"
   website:
     # build: ./website
     build:
