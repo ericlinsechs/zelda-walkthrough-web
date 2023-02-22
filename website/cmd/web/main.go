@@ -10,10 +10,7 @@ import (
 )
 
 type apis struct {
-	users     string
-	movies    string
-	showtimes string
-	bookings  string
+	armor string
 }
 
 type application struct {
@@ -25,8 +22,7 @@ type application struct {
 func main() {
 	serverAddr := flag.String("serverAddr", "", "HTTP server network address")
 	serverPort := flag.Int("serverPort", 8000, "HTTP server network port")
-	usersAPI := flag.String("usersAPI", "http://localhost:3000/api/users/", "Users API")
-	moviesAPI := flag.String("moviesAPI", "http://localhost:3000/api/movies/", "Movies API")
+	armorAPI := flag.String("armorAPI", "http://localhost:3000/api/armor/", "Armor API")
 	flag.Parse()
 
 	// Create logger for writing information and error messages.
@@ -38,8 +34,7 @@ func main() {
 		infoLog:  infoLog,
 		errorLog: errorLog,
 		apis: apis{
-			users:  *usersAPI,
-			movies: *moviesAPI,
+			armor: *armorAPI,
 		},
 	}
 

@@ -1,4 +1,4 @@
-{{define "movies/view"}}
+{{define "armors/view"}}
 
 {{template "header" .}}
 
@@ -10,16 +10,20 @@
                     <div class="card mb-3 shadow-sm">
                         <div class="card-body">
                             <div class="form-group row d-flex justify-content-center">
-                                <span class="col-md-6 text-right">Title:</span>
-                                <span class="col-md-6 text-left">{{.Title}}</span>
+                                <span class="col-md-6 text-right">Name:</span>
+                                <span class="col-md-6 text-left">{{.Name}}</span>
                             </div>
                             <div class="form-group row d-flex justify-content-center">
-                                <span class="col-md-6 text-right">Director:</span>
-                                <span class="col-md-6 text-left">{{.Director}}</span>
+                                <span class="col-md-6 text-right">Location:</span>
+                                <span class="col-md-6 text-left">{{.Location}}</span>
                             </div>
                             <div class="form-group row d-flex justify-content-center">
-                                <span class="col-md-6 text-right">Rating:</span>
-                                <span class="col-md-6 text-left">{{.Rating}}</span>
+                                <span class="col-md-6 text-right">Cost:</span>
+                                <span class="col-md-6 text-left">{{.Cost}} Rupees</span>
+                            </div>
+                            <div class="form-group row d-flex justify-content-center">
+                                <span class="col-md-6 text-right">Uses:</span>
+                                <span class="col-md-6 text-left">{{.Uses}}</span>
                             </div>
                         </div>
                     </div>
