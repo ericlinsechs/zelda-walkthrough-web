@@ -14,7 +14,7 @@ func (app *application) getAll(c *gin.Context) {
 	if err != nil {
 		app.serverError(c, err)
 	}
-	app.infoLog.Println("Users have been listed")
+	app.infoLog.Println("Armors have been listed")
 
 	// Send response
 	c.JSON(http.StatusOK, armor)
