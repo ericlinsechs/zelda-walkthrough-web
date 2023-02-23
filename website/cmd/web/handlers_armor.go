@@ -45,5 +45,6 @@ func (app *application) armorView(c *gin.Context) {
 		"Location": atd.Armor.Location,
 		"Cost":     atd.Armor.Cost,
 		"Uses":     atd.Armor.Uses,
+		"ImageUrl": atd.Armor.ImageUrl,
 	})
 }

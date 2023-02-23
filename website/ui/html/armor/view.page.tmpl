@@ -2,37 +2,81 @@
 
 {{template "header" .}}
 
-    <div class="album py-5 bg-light">
+<!-- <style>
+    table, td, th {
+      border: 2px solid black;
+      width: 50%;
+    }
+    table {
+        margin: auto;
+        border-collapse: collapse;
+        width: 100%;
+        height: 100%;
+        font-size: 1em;
+    }
+</style> -->
+    
+    <div class="album py-5 bg-secondary">
         <div class="container">
-
-            <div class="row d-flex justify-content-center">
-                <div class="col-md-6">
-                    <div class="card mb-3 shadow-sm">
+            <div class="row">
+                <div class="col-md-3 p-5">
+                    <div class="card bg-dark">
                         <div class="card-body">
-                            <div class="form-group row d-flex justify-content-center">
-                                <span class="col-md-6 text-right">Name:</span>
-                                <span class="col-md-6 text-left">{{.Name}}</span>
-                            </div>
-                            <div class="form-group row d-flex justify-content-center">
-                                <span class="col-md-6 text-right">Location:</span>
-                                <span class="col-md-6 text-left">{{.Location}}</span>
-                            </div>
-                            <div class="form-group row d-flex justify-content-center">
-                                <span class="col-md-6 text-right">Cost:</span>
-                                <span class="col-md-6 text-left">{{.Cost}} Rupees</span>
-                            </div>
-                            <div class="form-group row d-flex justify-content-center">
-                                <span class="col-md-6 text-right">Uses:</span>
-                                <span class="col-md-6 text-left">{{.Uses}}</span>
-                            </div>
-                        </div>
+                            <img class="mx-auto d-block" src={{.ImageUrl}} alt="Hylian-hood" width="80" height="80">
+                        </div>   
                     </div>
                 </div>
+                <div class="col-md-7" style="padding-left: 10px;">
+                    <table class="table table-light table-bordered" style="border: 2px solid black;margin: auto;font-size: 1em;width: 70%;">
+                        <tbody>
+                            <tr>
+                                <td>Name</td>
+                                <td>{{.Name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Location</td>
+                                <td>{{.Location}}</td>
+                            </tr>
+                            <tr>
+                                <td>Cost</td>
+                                <td>{{.Cost}}</td>
+                            </tr>
+                            <tr>
+                                <td>Uses</td>
+                                <td>{{.Uses}}</td>
+                            </tr>
+                        </tbody>
+                    </table>            
+                </div>
             </div>
-
         </div>
     </div>
 
 {{template "footer" .}}
 
 {{end}}
+
+<div class="row d-flex justify-content-center">
+    <div class="col-md-6">
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <div class="form-group row d-flex justify-content-center">
+                    <span class="col-md-6 text-right">Name:</span>
+                    <span class="col-md-6 text-left">{{.Name}}</span>
+                </div>
+                <div class="form-group row d-flex justify-content-center">
+                    <span class="col-md-6 text-right">Location:</span>
+                    <span class="col-md-6 text-left">{{.Location}}</span>
+                </div>
+                <div class="form-group row d-flex justify-content-center">
+                    <span class="col-md-6 text-right">Cost:</span>
+                    <span class="col-md-6 text-left">{{.Cost}} Rupees</span>
+                </div>
+                <div class="form-group row d-flex justify-content-center">
+                    <span class="col-md-6 text-right">Uses:</span>
+                    <span class="col-md-6 text-left">{{.Uses}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

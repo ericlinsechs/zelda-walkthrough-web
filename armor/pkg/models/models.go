@@ -10,5 +10,6 @@ type Armor struct {
 	Location     string             `bson:"location,omitempty"`
 	Cost         uint               `bson:"cost,omitempty"`
 	Uses         string             `bson:"uses,omitempty"`
+	ImageUrl     string             `bson:"imageurl,omitempty"`
 	LastTimeEdit string             `bson:"lasttimeedit,omitempty"`
 }
