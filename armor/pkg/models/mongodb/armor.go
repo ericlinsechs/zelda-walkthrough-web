@@ -9,6 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type ArmorModel struct {
@@ -58,6 +59,11 @@ func (model *ArmorModel) FindByID(id string) (*models.Armor, error) {
 
 func (model *ArmorModel) Insert(Armor *models.Armor) (*mongo.InsertOneResult, error) {
 	return model.Collection.InsertOne(context.TODO(), *Armor)
+}
+
+func (model *ArmorModel) InsertMany(docs []interface{}) (*mongo.InsertManyResult, error) {
+	opts := options.InsertMany().SetOrdered(true)
+	return model.Collection.InsertMany(context.TODO(), docs, opts)
 }
 
 func (model *ArmorModel) Delete(id string) (*mongo.DeleteResult, error) {

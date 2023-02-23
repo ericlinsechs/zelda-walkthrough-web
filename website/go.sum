@@ -20,6 +20,8 @@ github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230222092310-6b82547bf755 h1:zg7QCFU7Jentl0/8OT/tjstCZ5I7dQLvODWx9vvTLJA=
 github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230222092310-6b82547bf755/go.mod h1:oglnldGSA4g9HEu+3JhgDmUxmQQHyHercJBGBFub3M0=
+github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230223033515-3d38b7d9df2e h1:TQ4ynOFbKF8qbTpBxIKjxN3BfZt9mGCKHK0ufNlrzyk=
+github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230223033515-3d38b7d9df2e/go.mod h1:7wGbGrKdxhNe/ZPiY5K1yj53zhE0fZRAhnvgU2/ebyE=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=

@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"net/http"
-	"time"
 
 	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func (app *application) getAll(c *gin.Context) {
@@ -48,7 +48,7 @@ func (app *application) create(c *gin.Context) {
 		app.serverError(c, err)
 	}
 
-	newArmor.LastTimeEdit = time.Now().Format(time.UnixDate)
+	// newArmor.LastTimeEdit = time.Now().Format(time.UnixDate)
 
 	// Insert new user
 	insertResult, err := app.armor.Insert(newArmor)
@@ -56,10 +56,28 @@ func (app *application) create(c *gin.Context) {
 		app.serverError(c, err)
 	}
 
-	app.infoLog.Printf("New armor have been created, %s", insertResult.InsertedID)
+	app.infoLog.Printf("inserted document with ID %v", insertResult.InsertedID)
+}
 
-	// Send response back
-	// c.JSON(http.StatusOK, users)
+func (app *application) createMany(c *gin.Context) {
+	var newArmors []models.Armor
+
+	err := json.NewDecoder(c.Request.Body).Decode(&newArmors)
+	if err != nil {
+		app.serverError(c, err)
+	}
+
+	docs, err := toDoc(newArmors)
+	if err != nil {
+		app.serverError(c, err)
+	}
+
+	res, err := app.armor.InsertMany(docs)
+	if err != nil {
+		app.serverError(c, err)
+	}
+
+	app.infoLog.Printf("inserted documents with IDs %v\n", res.InsertedIDs)
 }
 
 func (app *application) delete(c *gin.Context) {
@@ -73,4 +91,21 @@ func (app *application) delete(c *gin.Context) {
 	}
 
 	app.infoLog.Printf("%d armor(s) have been eliminated", deleteResult.DeletedCount)
+}
+
+func toDoc(newArmor []models.Armor) (docs []interface{}, err error) {
+
+	for _, a := range newArmor {
+		data, err := bson.Marshal(a)
+		if err != nil {
+			return docs, err
+		}
+		var doc *bson.D
+		if err = bson.Unmarshal(data, &doc); err != nil {
+			return docs, err
+		}
+		docs = append(docs, *doc)
+	}
+	// fmt.Println(docs)
+	return docs, nil
 }
