@@ -9,23 +9,23 @@ import (
 )
 
 type armorTemplateData struct {
-	ArmorItem models.ArmorItem
-	// Armors []models.Armor
+	ArmorItem  models.ArmorItem
+	ArmorItems []models.ArmorItem
 }
 
-// func (app *application) armorList(c *gin.Context) {
+func (app *application) armorList(c *gin.Context) {
 
-// 	// Get armor list from API
-// 	var atd armorTemplateData
-// 	app.infoLog.Println("Calling armor API...")
-// 	app.getAPIContent(app.apis.armor, &atd.Armors)
-// 	app.infoLog.Println(atd.Armors)
+	// Get armor list from API
+	var atd armorTemplateData
+	app.infoLog.Println("Calling armor API...")
+	app.getAPIContent(app.apis.armor, &atd.ArmorItems)
+	app.infoLog.Println(atd.ArmorItems)
 
-// 	// Load template files
-// 	c.HTML(http.StatusOK, "armors/list", gin.H{
-// 		"Armors": atd.Armors,
-// 	})
-// }
+	// Load template files
+	c.HTML(http.StatusOK, "armors/list", gin.H{
+		"Armors": atd.ArmorItems,
+	})
+}
 
 func (app *application) armorView(c *gin.Context) {
 	// Get id from incoming url
@@ -37,7 +37,8 @@ func (app *application) armorView(c *gin.Context) {
 	app.infoLog.Printf("Calling api url: %s\n", url)
 
 	var atd armorTemplateData
-	app.getAPIContent(url, &atd.ArmorItem)
+	// app.getAPIContent(url, &atd.ArmorItem)
+	app.getAPIContent(app.apis.armor, &atd.ArmorItem)
 	app.infoLog.Println(atd.ArmorItem)
 
 	// Load template files

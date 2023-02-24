@@ -21,25 +21,25 @@ func (app *application) getAllItem(c *gin.Context) {
 	c.JSON(http.StatusOK, items)
 }
 
-// func (app *application) findByID(c *gin.Context) {
-// 	// Get id from incoming url
-// 	id := c.Param("id")
+func (app *application) findItemByID(c *gin.Context) {
+	// Get id from incoming url
+	id := c.Param("id")
 
-// 	movie, err := app.armor.FindByID(id)
-// 	if err != nil {
-// 		if err.Error() == "ErrNoDocuments" {
-// 			app.clientError(c, http.StatusBadRequest)
-// 			return
-// 		}
-// 		// Any other error will send an internal server error
-// 		app.serverError(c, err)
-// 	}
+	item, err := app.armorItem.FindItemByID(id)
+	if err != nil {
+		if err.Error() == "ErrNoDocuments" {
+			app.clientError(c, http.StatusBadRequest)
+			return
+		}
+		// Any other error will send an internal server error
+		app.serverError(c, err)
+	}
 
-// 	app.infoLog.Printf("Movie(id:%v) has been found!\n", id)
+	app.infoLog.Printf("Founded document with ID %v\n", id)
 
-// 	// Send response
-// 	c.JSON(http.StatusOK, movie)
-// }
+	// Send response
+	c.JSON(http.StatusOK, item)
+}
 
 func (app *application) createItem(c *gin.Context) {
 	ma := new(models.ArmorItem)

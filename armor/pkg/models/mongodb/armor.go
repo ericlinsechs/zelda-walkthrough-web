@@ -2,9 +2,12 @@ package mongodb
 
 import (
 	"context"
+	"errors"
+	"fmt"
 
 	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -36,25 +39,25 @@ func (model *ArmorItemModel) AllItem() ([]models.ArmorItem, error) {
 	return ma, err
 }
 
-// func (model *ArmorModel) FindByID(id string) (*models.Armor, error) {
-// 	p, err := primitive.ObjectIDFromHex(id)
-// 	if err != nil {
-// 		return nil, errors.New(fmt.Sprintf("Invalid ObjectID: %s", id))
-// 	}
+func (model *ArmorItemModel) FindItemByID(id string) (*models.ArmorItem, error) {
+	p, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("Invalid ObjectID: %s", id))
+	}
 
-// 	// Find user by id
-// 	Armor := new(models.Armor)
+	// Find user by id
+	result := new(models.ArmorItem)
 
-// 	err = model.Collection.FindOne(context.TODO(), bson.M{"_id": p}).Decode(Armor)
-// 	if err != nil {
-// 		if err == mongo.ErrNoDocuments {
-// 			return nil, errors.New("ErrNoDocuments")
-// 		}
-// 		return nil, err
-// 	}
+	err = model.Collection.FindOne(context.TODO(), bson.M{"_id": p}).Decode(result)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, errors.New("ErrNoDocuments")
+		}
+		return nil, err
+	}
 
-// 	return Armor, nil
-// }
+	return result, nil
+}
 
 func (model *ArmorItemModel) InsertItem(Armor *models.ArmorItem) (*mongo.InsertOneResult, error) {
 	return model.Collection.InsertOne(context.TODO(), *Armor)
