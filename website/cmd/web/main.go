@@ -22,7 +22,7 @@ type application struct {
 func main() {
 	serverAddr := flag.String("serverAddr", "", "HTTP server network address")
 	serverPort := flag.Int("serverPort", 8000, "HTTP server network port")
-	armorAPI := flag.String("armorAPI", "http://localhost:3000/api/armor/", "Armor API")
+	armorAPI := flag.String("armorAPI", "http://localhost:3000/api/armor/item/", "Armor API")
 	flag.Parse()
 
 	// Create logger for writing information and error messages.

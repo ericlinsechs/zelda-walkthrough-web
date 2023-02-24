@@ -16,9 +16,10 @@ import (
 )
 
 type application struct {
-	errorLog *log.Logger
-	infoLog  *log.Logger
-	armor    *mongodb.ArmorModel
+	errorLog  *log.Logger
+	infoLog   *log.Logger
+	armorSet  *mongodb.ArmorSetModel
+	armorItem *mongodb.ArmorItemModel
 }
 
 func main() {
@@ -80,8 +81,11 @@ func main() {
 	app := &application{
 		infoLog:  infoLog,
 		errorLog: errorLog,
-		armor: &mongodb.ArmorModel{
-			Collection: client.Database(*mongoDatabase).Collection("armor"),
+		armorSet: &mongodb.ArmorSetModel{
+			Collection: client.Database(*mongoDatabase).Collection("armorSet"),
+		},
+		armorItem: &mongodb.ArmorItemModel{
+			Collection: client.Database(*mongoDatabase).Collection("armorItem"),
 		},
 	}
 

@@ -10,7 +10,7 @@ func (app *application) routes(r *gin.Engine) *gin.Engine {
 
 	// Register handler functions.
 	r.GET("/", app.home)
-	r.GET("/armor/list", app.armorList)
+	r.GET("/armor/list", app.armorView)
 	r.GET("/armor/view/:id", app.armorView)
 	// r.GET("/users/list", app.usersList)
 	// r.GET("/users/view/:id", app.usersView)
