@@ -2,16 +2,6 @@
 
 {{template "header" .}}
 
-<!-- <div class="contain-fluid py-4 text-light">
-    <div class="d-flex flex-row justify-content-around align-content-between flex-wrap">
-            
-        {{range .Armors}}
-        <a href="/armor/view/{{.ID.Hex}}" class="btn btn-secondary p-1" style="width: 8rem;height: 2rem;">{{.Name}}</a>
-        {{end}}
-    </div>
-
-</div> -->
-
 <style>
     table {
       /* font-family: arial, sans-serif; */
@@ -35,24 +25,35 @@
     <h2 class="text-center">Armor Sets</h2>
     <br>
     <table class="table table-bordered text-light">
-    {range .ArmorSet}}
-    <tr>
-        <th>
-          {{.SetName}}
-          <ul>
-            {{range .SetEffect}}
-            <li>{{.}}</li>
-            {{end}}
-          </ul>
-        </th>
-        <th>
-            {{range .Tag}}
-            <a href="/armor/view/{{.ID.Hex}}" class="link btn-secondary p-1" style="width: 8rem;height: 2rem;">{{.}}</a>
-            {{end}}
-        </div>
-        </th>
-    </tr>
-    {{end}}
+      <thead>
+        <tr>
+          <th scope="col">Set Name</th>
+          <th scope="col">Added Effects</th>
+          <th scope="col">Armor Items</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .ArmorSet}}
+        <tr>
+            <th>
+              <h4>{{.SetName}}</h4>
+            </th>
+            <th>
+              <ul>
+                {{range .SetEffect}}
+                <li>{{.}}</li>
+                {{end}}
+              </ul>
+            </th>
+            <th>
+              {{range .Tag}}
+                <a href="/armor/view/{{.ID.Hex}}" class="link btn-secondary p-1" style="width: 8rem;height: 2rem;">{{.HeadGear}}</a>
+              {{end}}  
+            </div>
+            </th>
+        </tr>
+        {{end}}
+      </tbody>
     </table>
 </div>
 {{template "footer" .}}

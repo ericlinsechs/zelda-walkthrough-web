@@ -76,7 +76,7 @@ func (app *application) createItem(c *gin.Context) {
 	app.infoLog.Println(id)
 
 	// var updatedDocument bson.M
-	result, err := app.armorSet.FindSetAndUpdate(ma.Parent, ma.Part, id)
+	result, err := app.armorSet.FindSetAndUpdate(ma, id)
 	if err != nil {
 		if err.Error() == "ErrNoDocuments" {
 			app.clientError(c, http.StatusBadRequest)
