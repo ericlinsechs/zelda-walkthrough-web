@@ -7,19 +7,15 @@
         <h2 class="text-center">{{.Name}}</h2>
         <h3>Characteristics</h3><hr>
         <ul>
-            {{range .Characteristics}}
+            {{range .Characteristic}}
             <li>{{.}}</li>
-            <!-- <li>Base Defense Rating: 3</li>
-            <li>Level 2 Set Bonus: None</li> -->
             {{end}}
         </ul>
         <br>
         <h3>Locations Founded</h3><hr>
-        <!-- <p>Kakariko Village, Hateno Village (60 Rupees)</p> -->
         <p>{{.Location}}</p>
         <br>
         <h3>Upgrade</h3><hr>
-        <!-- <p>This Armor can be dyed, and can also upgraded by the Great Fairy Fountains.</p> -->
         <p>{{.Upgrade}}</p>
     </div>
 </div>

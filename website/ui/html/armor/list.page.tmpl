@@ -2,7 +2,7 @@
 
 {{template "header" .}}
 
-<div class="contain-fluid py-4 text-light">
+<!-- <div class="contain-fluid py-4 text-light">
     <div class="d-flex flex-row justify-content-around align-content-between flex-wrap">
             
         {{range .Armors}}
@@ -10,8 +10,51 @@
         {{end}}
     </div>
 
-</div>
+</div> -->
 
+<style>
+    table {
+      /* font-family: arial, sans-serif; */
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      /* border: 1px solid #dddddd; */
+      text-align: left;
+      padding: 8px;
+    }
+    
+    /* tr:nth-child(even) {
+      background-color: #dddddd;
+    } */
+</style>
+
+<div class="container text-light">
+    <br>
+    <h2 class="text-center">Armor Sets</h2>
+    <br>
+    <table class="table table-bordered text-light">
+    {range .ArmorSet}}
+    <tr>
+        <th>
+          {{.SetName}}
+          <ul>
+            {{range .SetEffect}}
+            <li>{{.}}</li>
+            {{end}}
+          </ul>
+        </th>
+        <th>
+            {{range .Tag}}
+            <a href="/armor/view/{{.ID.Hex}}" class="link btn-secondary p-1" style="width: 8rem;height: 2rem;">{{.}}</a>
+            {{end}}
+        </div>
+        </th>
+    </tr>
+    {{end}}
+    </table>
+</div>
 {{template "footer" .}}
 
 {{end}}
