@@ -6,6 +6,7 @@ import (
 
 	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func (app *application) getAllSet(c *gin.Context) {
@@ -60,26 +61,26 @@ func (app *application) createSet(c *gin.Context) {
 	app.infoLog.Printf("inserted document with ID %v", insertResult.InsertedID)
 }
 
-// func (app *application) createMany(c *gin.Context) {
-// 	var newArmors []models.Armor
+func (app *application) createManySet(c *gin.Context) {
+	var ma []models.ArmorSet
 
-// 	err := json.NewDecoder(c.Request.Body).Decode(&newArmors)
-// 	if err != nil {
-// 		app.serverError(c, err)
-// 	}
+	err := json.NewDecoder(c.Request.Body).Decode(&ma)
+	if err != nil {
+		app.serverError(c, err)
+	}
 
-// 	docs, err := toDoc(newArmors)
-// 	if err != nil {
-// 		app.serverError(c, err)
-// 	}
+	docs, err := toDoc(ma)
+	if err != nil {
+		app.serverError(c, err)
+	}
 
-// 	res, err := app.armor.InsertMany(docs)
-// 	if err != nil {
-// 		app.serverError(c, err)
-// 	}
+	res, err := app.armorSet.InsertManySet(docs)
+	if err != nil {
+		app.serverError(c, err)
+	}
 
-// 	app.infoLog.Printf("inserted documents with IDs %v\n", res.InsertedIDs)
-// }
+	app.infoLog.Printf("inserted documents with IDs %v\n", res.InsertedIDs)
+}
 
 func (app *application) deleteSet(c *gin.Context) {
 	// Get id from incoming url
@@ -94,19 +95,19 @@ func (app *application) deleteSet(c *gin.Context) {
 	app.infoLog.Printf("deleted %v documents\n", res.DeletedCount)
 }
 
-// func toDoc(newArmor []models.Armor) (docs []interface{}, err error) {
+func toDoc(newArmorSet []models.ArmorSet) (docs []interface{}, err error) {
 
-// 	for _, a := range newArmor {
-// 		data, err := bson.Marshal(a)
-// 		if err != nil {
-// 			return docs, err
-// 		}
-// 		var doc *bson.D
-// 		if err = bson.Unmarshal(data, &doc); err != nil {
-// 			return docs, err
-// 		}
-// 		docs = append(docs, *doc)
-// 	}
-// 	// fmt.Println(docs)
-// 	return docs, nil
-// }
+	for _, a := range newArmorSet {
+		data, err := bson.Marshal(a)
+		if err != nil {
+			return docs, err
+		}
+		var doc *bson.D
+		if err = bson.Unmarshal(data, &doc); err != nil {
+			return docs, err
+		}
+		docs = append(docs, *doc)
+	}
+	// fmt.Println(docs)
+	return docs, nil
+}

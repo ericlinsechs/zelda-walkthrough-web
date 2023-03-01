@@ -6,7 +6,6 @@ import (
 
 	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (app *application) getAllItem(c *gin.Context) {
@@ -72,20 +71,21 @@ func (app *application) createItem(c *gin.Context) {
 	// }
 
 	// app.infoLog.Printf("updated document %v", result)
-	id := insertResult.InsertedID.(primitive.ObjectID).Hex()
-	app.infoLog.Println(id)
 
-	// var updatedDocument bson.M
-	result, err := app.armorSet.FindSetAndUpdate(ma, id)
-	if err != nil {
-		if err.Error() == "ErrNoDocuments" {
-			app.clientError(c, http.StatusBadRequest)
-			return
-		}
-		// Any other error will send an internal server error
-		app.serverError(c, err)
-	}
-	app.infoLog.Printf("updated document %v", result)
+	// id := insertResult.InsertedID.(primitive.ObjectID).Hex()
+	// app.infoLog.Println(id)
+
+	// // var updatedDocument bson.M
+	// result, err := app.armorSet.FindSetAndUpdate(ma, id)
+	// if err != nil {
+	// 	if err.Error() == "ErrNoDocuments" {
+	// 		app.clientError(c, http.StatusBadRequest)
+	// 		return
+	// 	}
+	// 	// Any other error will send an internal server error
+	// 	app.serverError(c, err)
+	// }
+	// app.infoLog.Printf("updated document %v", result)
 }
 
 // func (app *application) createMany(c *gin.Context) {

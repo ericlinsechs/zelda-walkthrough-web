@@ -74,27 +74,27 @@ func (model *ArmorModel) InsertSet(Armor *models.ArmorSet) (*mongo.InsertOneResu
 	return model.Collection.InsertOne(context.TODO(), *Armor)
 }
 
-func (model *ArmorModel) FindSetAndUpdate(Name string, Part string, ItemID string) (bson.M, error) {
+// func (model *ArmorModel) FindSetAndUpdate(Name string, Part string, ItemID string) (bson.M, error) {
 
-	var updatedDocument bson.M
-	opts := options.FindOneAndUpdate().SetUpsert(false)
-	filter := bson.D{{"setname", Name}}
-	update := bson.D{{"$set", bson.D{{fmt.Sprintf("tag.%s", Part), ItemID}}}}
+// 	var updatedDocument bson.M
+// 	opts := options.FindOneAndUpdate().SetUpsert(false)
+// 	filter := bson.D{{"setname", Name}}
+// 	update := bson.D{{"$set", bson.D{{fmt.Sprintf("tag.%s", Part), ItemID}}}}
 
-	err := model.Collection.FindOneAndUpdate(context.TODO(), filter, update, opts).Decode(&updatedDocument)
-	if err != nil {
-		if err == mongo.ErrNoDocuments {
-			return nil, errors.New("ErrNoDocuments")
-		}
-		return nil, err
-	}
-	return updatedDocument, nil
-}
-
-// func (model *ArmorModel) InsertMany(docs []interface{}) (*mongo.InsertManyResult, error) {
-// 	opts := options.InsertMany().SetOrdered(true)
-// 	return model.Collection.InsertMany(context.TODO(), docs, opts)
+// 	err := model.Collection.FindOneAndUpdate(context.TODO(), filter, update, opts).Decode(&updatedDocument)
+// 	if err != nil {
+// 		if err == mongo.ErrNoDocuments {
+// 			return nil, errors.New("ErrNoDocuments")
+// 		}
+// 		return nil, err
+// 	}
+// 	return updatedDocument, nil
 // }
+
+func (model *ArmorModel) InsertManySet(docs []interface{}) (*mongo.InsertManyResult, error) {
+	opts := options.InsertMany().SetOrdered(true)
+	return model.Collection.InsertMany(context.TODO(), docs, opts)
+}
 
 func (model *ArmorModel) DeleteSet(id string) (*mongo.DeleteResult, error) {
 	primitiveID, err := primitive.ObjectIDFromHex(id)

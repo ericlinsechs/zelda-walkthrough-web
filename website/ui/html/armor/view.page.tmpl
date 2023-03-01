@@ -4,19 +4,19 @@
 
 <div class="container-fluid py-5">
     <div class="container text-light">
-        <h2 class="text-center">{{.Name}}</h2>
-        <h3>Characteristics</h3><hr>
+        <h2 class="text-center">{{.ArmorSet.SetName}}</h2>
+        <h3>How to obtain</h3><hr>
         <ul>
-            {{range .Characteristic}}
-            <li>{{.}}</li>
-            {{end}}
+            <li>HeadGear: {{.HeadGear}}</li>
+            <li>BodyGear: {{.BodyGear}}</li>
+            <li>LegGear: {{.LegGear}}</li>
         </ul>
-        <br>
+        <!-- <br>
         <h3>Locations Founded</h3><hr>
         <p>{{.Location}}</p>
         <br>
         <h3>Upgrade</h3><hr>
-        <p>{{.Upgrade}}</p>
+        <p>{{.Upgrade}}</p> -->
     </div>
 </div>
 

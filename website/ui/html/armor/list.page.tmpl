@@ -29,27 +29,24 @@
         <tr>
           <th scope="col">Set Name</th>
           <th scope="col">Added Effects</th>
-          <th scope="col">Armor Items</th>
+          <th scope="col">Set Bonus</th>
+          <th scope="col">Detail</th>
         </tr>
       </thead>
       <tbody>
         {{range .ArmorSet}}
         <tr>
             <th>
-              <h4>{{.SetName}}</h4>
+              <b>{{.SetName}}</b>
             </th>
             <th>
-              <ul>
-                {{range .SetEffect}}
-                <li>{{.}}</li>
-                {{end}}
-              </ul>
+                {{.Effect}}
             </th>
             <th>
-              {{range .Tag}}
-                <a href="/armor/view/{{.ID.Hex}}" class="link btn-secondary p-1" style="width: 8rem;height: 2rem;">{{.HeadGear}}</a>
-              {{end}}  
-            </div>
+              {{.SetBonus}}
+            </th>
+            <th>
+              <a href="/armor/view/{{.ID.Hex}}" class="link">View</a>
             </th>
         </tr>
         {{end}}
@@ -59,3 +56,7 @@
 {{template "footer" .}}
 
 {{end}}
+
+<!-- {{range .Tag}}
+  <a href="/armor/view/{{.ID.Hex}}" class="link btn-secondary p-1" style="width: 8rem;height: 2rem;">{{.HeadGear}}</a>
+{{end}}   -->

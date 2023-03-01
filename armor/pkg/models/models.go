@@ -5,10 +5,13 @@ import (
 )
 
 type ArmorSet struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty"`
-	SetName   string             `bson:"setname"`
-	SetEffect []string           `bson:"seteffect,omitempty"`
-	Tag       *Item              `bson:"tag,omitempty"`
+	ID          primitive.ObjectID `bson:"_id,omitempty"`
+	SetName     string             `bson:"setname,omitempty"`
+	Effect      string             `bson:"effect,omitempty"`
+	SetBonus    string             `bson:"setbonus,omitempty"`
+	HowToObtain []string           `bson:"howtoobtain,omitempty"`
+	Tag         Item               `bson:"tag,omitempty"`
+	// CreatedOn   string             `bson:"createdOn,omitempty"`
 }
 type Item struct {
 	HeadGear string `bson:"headgear,omitempty"`
