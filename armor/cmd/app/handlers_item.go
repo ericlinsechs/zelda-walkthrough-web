@@ -6,6 +6,7 @@ import (
 
 	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
+	"go.mongodb.org/mongo-driver/bson"
 )
 
 func (app *application) getAllItem(c *gin.Context) {
@@ -88,56 +89,56 @@ func (app *application) createItem(c *gin.Context) {
 	// app.infoLog.Printf("updated document %v", result)
 }
 
-// func (app *application) createMany(c *gin.Context) {
-// 	var newArmors []models.Armor
+func (app *application) createManyItem(c *gin.Context) {
+	var newArmorItems []models.ArmorItem
 
-// 	err := json.NewDecoder(c.Request.Body).Decode(&newArmors)
-// 	if err != nil {
-// 		app.serverError(c, err)
-// 	}
+	err := json.NewDecoder(c.Request.Body).Decode(&newArmorItems)
+	if err != nil {
+		app.serverError(c, err)
+	}
 
-// 	docs, err := toDoc(newArmors)
-// 	if err != nil {
-// 		app.serverError(c, err)
-// 	}
+	docs, err := itemToDoc(newArmorItems)
+	if err != nil {
+		app.serverError(c, err)
+	}
 
-// 	res, err := app.armor.InsertMany(docs)
-// 	if err != nil {
-// 		app.serverError(c, err)
-// 	}
+	res, err := app.armorItem.InsertManyItem(docs)
+	if err != nil {
+		app.serverError(c, err)
+	}
 
-// 	app.infoLog.Printf("inserted documents with IDs %v\n", res.InsertedIDs)
-// }
+	app.infoLog.Printf("inserted documents with IDs %v\n", res.InsertedIDs)
+}
 
-// func (app *application) delete(c *gin.Context) {
-// 	// Get id from incoming url
-// 	id := c.Param("id")
+func (app *application) deleteItem(c *gin.Context) {
+	// Get id from incoming url
+	id := c.Param("id")
 
-// 	// Delete user by id
-// 	deleteResult, err := app.armor.Delete(id)
-// 	if err != nil {
-// 		app.serverError(c, err)
-// 	}
+	// Delete user by id
+	deleteResult, err := app.armorItem.DeleteItem(id)
+	if err != nil {
+		app.serverError(c, err)
+	}
 
-// 	app.infoLog.Printf("%d armor(s) have been eliminated", deleteResult.DeletedCount)
-// }
+	app.infoLog.Printf("%d armor(s) have been eliminated", deleteResult.DeletedCount)
+}
 
-// func toDoc(newArmor []models.Armor) (docs []interface{}, err error) {
+func itemToDoc(newArmor []models.ArmorItem) (docs []interface{}, err error) {
 
-// 	for _, a := range newArmor {
-// 		data, err := bson.Marshal(a)
-// 		if err != nil {
-// 			return docs, err
-// 		}
-// 		var doc *bson.D
-// 		if err = bson.Unmarshal(data, &doc); err != nil {
-// 			return docs, err
-// 		}
-// 		docs = append(docs, *doc)
-// 	}
-// 	// fmt.Println(docs)
-// 	return docs, nil
-// }
+	for _, a := range newArmor {
+		data, err := bson.Marshal(a)
+		if err != nil {
+			return docs, err
+		}
+		var doc *bson.D
+		if err = bson.Unmarshal(data, &doc); err != nil {
+			return docs, err
+		}
+		docs = append(docs, *doc)
+	}
+	// fmt.Println(docs)
+	return docs, nil
+}
 
 // func SlicetoDoc(newArmor []models.Armor) (docs []interface{}, err error) {
 
