@@ -9,22 +9,38 @@ import (
 )
 
 type ArmorSet struct {
+	ID       primitive.ObjectID `bson:"_id,omitempty"`
+	SetName  string             `bson:"setname,omitempty"`
+	Effect   string             `bson:"effect,omitempty"`
+	SetBonus string             `bson:"setbonus,omitempty"`
+	Tag      []string           `bson:"tag,omitempty"`
+	// CreatedOn   string             `bson:"createdOn,omitempty"`
+}
+type ArmorItem struct {
 	ID          primitive.ObjectID `bson:"_id,omitempty"`
 	SetName     string             `bson:"setname,omitempty"`
-	Effect      string             `bson:"effect,omitempty"`
-	SetBonus    string             `bson:"setbonus,omitempty"`
-	HowToObtain []string           `bson:"howtoobtain,omitempty"`
-	Tag         *Item              `bson:"tag,omitempty"`
+	Name        string             `bson:"name,omitempty"`
+	HowToObtain string             `bson:"howtoobtain,omitempty"`
+	Url         string             `bson:"url,omitempty"`
+	Upgrade     UpgradeLevel       `bson:"upgrade,omitempty"`
 }
-type Item struct {
-	HeadGear string `bson:"headgear,omitempty"`
-	BodyGear string `bson:"bodygear,omitempty"`
-	LegGear  string `bson:"leggear,omitempty"`
+
+type UpgradeLevel struct {
+	FirstUpgrade  UpgradeInfo `bson:"firstupgrade,omitempty"`
+	SecondUpgrade UpgradeInfo `bson:"secondupgrade,omitempty"`
+	ThirdUpgrade  UpgradeInfo `bson:"thirdupgrade,omitempty"`
+	FinalUpgrade  UpgradeInfo `bson:"finalupgrade,omitempty"`
+}
+type UpgradeInfo struct {
+	Bonus     string   `bson:"bonus,omitempty"`
+	Materials []string `bson:"materials,omitempty"`
 }
 
 type armorTemplateData struct {
-	ArmorSet  ArmorSet
-	ArmorSets []ArmorSet
+	ArmorSet   ArmorSet
+	ArmorSets  []ArmorSet
+	ArmorItem  ArmorItem
+	ArmorItems []ArmorItem
 }
 
 func (app *application) armorList(c *gin.Context) {
@@ -45,7 +61,7 @@ func (app *application) armorView(c *gin.Context) {
 	// Get id from incoming url
 	armorID := c.Param("id")
 
-	// Get armor list from API
+	// Get the armorSet from API
 	url := fmt.Sprintf("%s%s", app.apis.armorSet, armorID)
 	app.infoLog.Printf("Calling api url: %s\n", url)
 
@@ -53,11 +69,16 @@ func (app *application) armorView(c *gin.Context) {
 	app.getAPIContent(url, &atd.ArmorSet)
 	app.infoLog.Println(atd.ArmorSet)
 
+	for _, itemID := range atd.ArmorSet.Tag {
+		url := fmt.Sprintf("%s%s", app.apis.armorItem, itemID)
+		app.infoLog.Printf("Calling api url: %s\n", url)
+		var temp armorTemplateData
+		app.getAPIContent(url, &temp.ArmorItem)
+		atd.ArmorItems = append(atd.ArmorItems, temp.ArmorItem)
+	}
 	// Load template files
 	c.HTML(http.StatusOK, "armors/view", gin.H{
-		"ArmorSet": atd.ArmorSet,
-		"HeadGear": atd.ArmorSet.HowToObtain[0],
-		"BodyGear": atd.ArmorSet.HowToObtain[1],
-		"LegGear":  atd.ArmorSet.HowToObtain[2],
+		"SetName":    atd.ArmorItems[0].SetName,
+		"ArmorItems": atd.ArmorItems,
 	})
 }

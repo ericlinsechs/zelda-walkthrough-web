@@ -7,6 +7,7 @@ import (
 	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (app *application) getAllItem(c *gin.Context) {
@@ -61,7 +62,7 @@ func (app *application) createItem(c *gin.Context) {
 
 	app.infoLog.Printf("inserted document with ID %v", insertResult.InsertedID)
 
-	// result, err := app.armorSet.FindSetByName(ma.Parent)
+	// result, err := app.armorSet.FindSetByName(ma.SetName)
 	// if err != nil {
 	// 	if err.Error() == "ErrNoDocuments" {
 	// 		app.clientError(c, http.StatusBadRequest)
@@ -73,20 +74,20 @@ func (app *application) createItem(c *gin.Context) {
 
 	// app.infoLog.Printf("updated document %v", result)
 
-	// id := insertResult.InsertedID.(primitive.ObjectID).Hex()
-	// app.infoLog.Println(id)
+	id := insertResult.InsertedID.(primitive.ObjectID).Hex()
+	app.infoLog.Println(id)
 
-	// // var updatedDocument bson.M
-	// result, err := app.armorSet.FindSetAndUpdate(ma, id)
-	// if err != nil {
-	// 	if err.Error() == "ErrNoDocuments" {
-	// 		app.clientError(c, http.StatusBadRequest)
-	// 		return
-	// 	}
-	// 	// Any other error will send an internal server error
-	// 	app.serverError(c, err)
-	// }
-	// app.infoLog.Printf("updated document %v", result)
+	// var updatedDocument bson.M
+	result, err := app.armorSet.UpdateSetByName(ma.SetName, id)
+	if err != nil {
+		if err.Error() == "ErrNoDocuments" {
+			app.clientError(c, http.StatusBadRequest)
+			return
+		}
+		// Any other error will send an internal server error
+		app.serverError(c, err)
+	}
+	app.infoLog.Printf("updated document with ID %v", result.UpsertedID)
 }
 
 func (app *application) createManyItem(c *gin.Context) {
@@ -108,6 +109,23 @@ func (app *application) createManyItem(c *gin.Context) {
 	}
 
 	app.infoLog.Printf("inserted documents with IDs %v\n", res.InsertedIDs)
+
+	for index, id := range res.InsertedIDs {
+		id := id.(primitive.ObjectID).Hex()
+		app.infoLog.Println(id)
+
+		// var updatedDocument bson.M
+		result, err := app.armorSet.UpdateSetByName(newArmorItems[index].SetName, id)
+		if err != nil {
+			if err.Error() == "ErrNoDocuments" {
+				app.clientError(c, http.StatusBadRequest)
+				return
+			}
+			// Any other error will send an internal server error
+			app.serverError(c, err)
+		}
+		app.infoLog.Printf("Matched %v documents and updated %v documents.\n", result.MatchedCount, result.ModifiedCount)
+	}
 }
 
 func (app *application) deleteItem(c *gin.Context) {

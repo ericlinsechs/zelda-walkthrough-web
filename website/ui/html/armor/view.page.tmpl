@@ -4,19 +4,79 @@
 
 <div class="container-fluid py-5">
     <div class="container text-light">
-        <h2 class="text-center">{{.ArmorSet.SetName}}</h2>
-        <h3>How to obtain</h3><hr>
-        <ul>
-            <li>HeadGear: {{.HeadGear}}</li>
-            <li>BodyGear: {{.BodyGear}}</li>
-            <li>LegGear: {{.LegGear}}</li>
-        </ul>
-        <!-- <br>
-        <h3>Locations Founded</h3><hr>
-        <p>{{.Location}}</p>
-        <br>
-        <h3>Upgrade</h3><hr>
-        <p>{{.Upgrade}}</p> -->
+        <h1 class="text-center">{{.SetName}}</h1>
+        {{range .ArmorItems}}
+            <h2>{{.Name}}</h2><hr>
+            <ul>
+                <h5><li>How To Obtain</li></h5>
+                <p>{{.HowToObtain}}</p>
+                <br>
+                <h5><li>Upgrade</li></h5>
+                <table class="table table-bordered text-light" style="width: 40%;">
+                    <thead>
+                      <tr>
+                        <th scope="col" style="text-align: center;">Upgrade</th>
+                        <th scope="col" style="text-align: center;">Bonus</th>
+                        <th scope="col" style="text-align: center;">Materials Needed</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>First Upgrade</th>
+                            {{with .Upgrade.FirstUpgrade}}
+                                <th>{{.Bonus}}</th>
+                                <th>
+                                    {{range .Materials}}
+                                    {{.}}
+                                    <br>
+                                    {{end}}
+                                </th>
+                            {{end}}
+                        </tr>
+                        <tr>
+                            <th>Second Upgrade</th>
+                            {{with .Upgrade.SecondUpgrade}}
+                                <th>{{.Bonus}}</th>
+                                <th>
+                                    {{range .Materials}}
+                                    {{.}}
+                                    <br>
+                                    {{end}}
+                                </th>
+                            {{end}}
+                        </tr>
+                        <tr>
+                            <th>Third Upgrade</th>
+                            {{with .Upgrade.ThirdUpgrade}}
+                                <th>{{.Bonus}}</th>
+                                <th>
+                                    {{range .Materials}}
+                                    {{.}}
+                                    <br>
+                                    {{end}}
+                                </th>
+                            {{end}}
+                        </tr>
+                        <tr>
+                            <th>Final Upgrade</th>
+                            {{with .Upgrade.FinalUpgrade}}
+                                <th>{{.Bonus}}</th>
+                                <th>
+                                    {{range .Materials}}
+                                    {{.}}
+                                    <br>
+                                    {{end}}
+                                </th>
+                            {{end}}
+                        </tr>
+                    </tbody>
+                </table>
+            </ul>
+
+
+
+
+        {{end}}
     </div>
 </div>
 

@@ -74,22 +74,21 @@ func (model *ArmorModel) InsertSet(Armor *models.ArmorSet) (*mongo.InsertOneResu
 	return model.Collection.InsertOne(context.TODO(), *Armor)
 }
 
-// func (model *ArmorModel) FindSetAndUpdate(Name string, Part string, ItemID string) (bson.M, error) {
+func (model *ArmorModel) UpdateSetByName(Name string, ItemID string) (*mongo.UpdateResult, error) {
 
-// 	var updatedDocument bson.M
-// 	opts := options.FindOneAndUpdate().SetUpsert(false)
-// 	filter := bson.D{{"setname", Name}}
-// 	update := bson.D{{"$set", bson.D{{fmt.Sprintf("tag.%s", Part), ItemID}}}}
+	opts := options.Update().SetUpsert(false)
+	update := bson.M{"$addToSet": bson.M{"tag": ItemID}}
+	// update := bson.M{"$set", bson.D{{fmt.Sprintf("tag.%s", Part), ItemID}}}
 
-// 	err := model.Collection.FindOneAndUpdate(context.TODO(), filter, update, opts).Decode(&updatedDocument)
-// 	if err != nil {
-// 		if err == mongo.ErrNoDocuments {
-// 			return nil, errors.New("ErrNoDocuments")
-// 		}
-// 		return nil, err
-// 	}
-// 	return updatedDocument, nil
-// }
+	result, err := model.Collection.UpdateOne(context.TODO(), bson.M{"setname": Name}, update, opts)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, errors.New("ErrNoDocuments")
+		}
+		return nil, err
+	}
+	return result, nil
+}
 
 func (model *ArmorModel) InsertManySet(docs []interface{}) (*mongo.InsertManyResult, error) {
 	opts := options.InsertMany().SetOrdered(true)
