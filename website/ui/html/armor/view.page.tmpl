@@ -10,8 +10,9 @@
             <ul>
                 <h5><li>How To Obtain</li></h5>
                 <p>{{.HowToObtain}}</p>
-                <br>
                 <h5><li>Upgrade</li></h5>
+                {{if .Upgrade.FirstUpgrade.Bonus}}
+                <p>This Armor can be dyed upgraded by the Great Fairy Fountains.</p>
                 <table class="table table-bordered text-light" style="width: 40%;">
                     <thead>
                       <tr>
@@ -71,11 +72,11 @@
                         </tr>
                     </tbody>
                 </table>
+                {{else}}
+                <p>This Armor cannot be upgraded.</p>
+                {{end}}
             </ul>
-
-
-
-
+            <br>
         {{end}}
     </div>
 </div>
