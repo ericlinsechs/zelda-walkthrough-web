@@ -20,6 +20,7 @@ type application struct {
 	infoLog   *log.Logger
 	armorSet  *mongodb.ArmorModel
 	armorItem *mongodb.ArmorModel
+	imageRoot string
 }
 
 func main() {
@@ -77,6 +78,11 @@ func main() {
 	}
 	infoLog.Printf("Ping mondoDB success")
 
+	imageRoot := "image"
+	if _, err := os.Stat(imageRoot); os.IsNotExist(err) {
+		os.Mkdir(imageRoot, 0755)
+	}
+
 	// Initialize a new instance of application containing the dependencies.
 	app := &application{
 		infoLog:  infoLog,
@@ -87,6 +93,7 @@ func main() {
 		armorItem: &mongodb.ArmorModel{
 			Collection: client.Database(*mongoDatabase).Collection("armorItem"),
 		},
+		imageRoot: imageRoot,
 	}
 
 	// Initialize a new http.Server struct.
