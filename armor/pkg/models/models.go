@@ -31,3 +31,9 @@ type UpgradeInfo struct {
 	Bonus     string   `bson:"bonus,omitempty"`
 	Materials []string `bson:"materials,omitempty"`
 }
+
+type ArmorImage struct {
+	ID   primitive.ObjectID `bson:"_id,omitempty"`
+	Name string             `bson:"name"`
+	Data []byte             `bson:"data"`
+}

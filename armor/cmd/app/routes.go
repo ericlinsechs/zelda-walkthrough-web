@@ -22,5 +22,6 @@ func (app *application) routes(r *gin.Engine) *gin.Engine {
 	// Armor Image
 	// r.GET("/api/armor/image/", app.getAllSet)
 	r.POST("/api/armor/image/", app.createImage)
+	r.GET("/api/armor/image/:id", app.findImage)
 	return r
 }

@@ -16,11 +16,12 @@ import (
 )
 
 type application struct {
-	errorLog  *log.Logger
-	infoLog   *log.Logger
-	armorSet  *mongodb.ArmorModel
-	armorItem *mongodb.ArmorModel
-	imageRoot string
+	errorLog   *log.Logger
+	infoLog    *log.Logger
+	armorSet   *mongodb.ArmorModel
+	armorItem  *mongodb.ArmorModel
+	armorImage *mongodb.ArmorModel
+	imageRoot  string
 }
 
 func main() {
@@ -78,7 +79,7 @@ func main() {
 	}
 	infoLog.Printf("Ping mondoDB success")
 
-	imageRoot := "image"
+	imageRoot := "../../image"
 	if _, err := os.Stat(imageRoot); os.IsNotExist(err) {
 		os.Mkdir(imageRoot, 0755)
 	}
@@ -92,6 +93,9 @@ func main() {
 		},
 		armorItem: &mongodb.ArmorModel{
 			Collection: client.Database(*mongoDatabase).Collection("armorItem"),
+		},
+		armorImage: &mongodb.ArmorModel{
+			Collection: client.Database(*mongoDatabase).Collection("armorImage"),
 		},
 		imageRoot: imageRoot,
 	}
