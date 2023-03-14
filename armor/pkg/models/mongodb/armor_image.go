@@ -31,6 +31,27 @@ func (model *ArmorModel) FindImage(id string) (*models.ArmorImage, error) {
 	return result, nil
 }
 
+func (model *ArmorModel) FindImageByName(name string) (*models.ArmorImage, error) {
+	filter := bson.M{"name": name}
+
+	// Find user by id
+	result := new(models.ArmorImage)
+
+	err := model.Collection.FindOne(context.TODO(), filter).Decode(result)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return nil, errors.New("ErrNoDocuments")
+		}
+		return nil, err
+	}
+
+	return result, nil
+}
+
 func (model *ArmorModel) InsertImage(ArmorImage *models.ArmorImage) (*mongo.InsertOneResult, error) {
 	return model.Collection.InsertOne(context.Background(), *ArmorImage)
+}
+
+func (model *ArmorModel) UpdateImage(ArmorImage *models.ArmorImage) (*mongo.InsertOneResult, error) {
+	// return model.Collection.InsertOne(context.Background(), *ArmorImage)
 }

@@ -10,8 +10,9 @@ import (
 )
 
 type apis struct {
-	armorSet  string
-	armorItem string
+	armorSet   string
+	armorItem  string
+	armorImage string
 }
 
 type application struct {
@@ -23,8 +24,9 @@ type application struct {
 func main() {
 	serverAddr := flag.String("serverAddr", "", "HTTP server network address")
 	serverPort := flag.Int("serverPort", 8000, "HTTP server network port")
-	armorSetAPI := flag.String("armorSetAPI", "http://localhost:3000/api/armor/set/", "Armor API")
-	armorItemAPI := flag.String("armorItemAPI", "http://localhost:3000/api/armor/item/", "Armor API")
+	armorSetAPI := flag.String("armorSetAPI", "http://localhost:3000/api/armor/set/", "Armor Set API")
+	armorItemAPI := flag.String("armorItemAPI", "http://localhost:3000/api/armor/item/", "Armor ItemAPI")
+	armorImageAPI := flag.String("armorImageAPI", "http://localhost:3000/api/armor/image/name/", "Armor Image API")
 	flag.Parse()
 
 	// Create logger for writing information and error messages.
@@ -36,8 +38,9 @@ func main() {
 		infoLog:  infoLog,
 		errorLog: errorLog,
 		apis: apis{
-			armorSet:  *armorSetAPI,
-			armorItem: *armorItemAPI,
+			armorSet:   *armorSetAPI,
+			armorItem:  *armorItemAPI,
+			armorImage: *armorImageAPI,
 		},
 	}
 
