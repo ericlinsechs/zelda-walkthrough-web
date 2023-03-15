@@ -26,6 +26,8 @@ github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230224063544-4e3bff
 github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230224063544-4e3bff360bbf/go.mod h1:7wGbGrKdxhNe/ZPiY5K1yj53zhE0fZRAhnvgU2/ebyE=
 github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230314102130-20bfc7ce03e5 h1:aQ3HH+bnQJdcJMvaMFj8Cq64JSfhmCT34/VNA7CZhb8=
 github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230314102130-20bfc7ce03e5/go.mod h1:7wGbGrKdxhNe/ZPiY5K1yj53zhE0fZRAhnvgU2/ebyE=
+github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230315071817-32aa6b3bbd80 h1:ApSgOJ+uqzaEUXoDgaE6XCuBdP9PYuSdthKrQTHZmWs=
+github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230315071817-32aa6b3bbd80/go.mod h1:7wGbGrKdxhNe/ZPiY5K1yj53zhE0fZRAhnvgU2/ebyE=
 github.com/fsnotify/fsnotify v1.4.9 h1:hsms1Qyu0jgnwNXIxa+/V/PDsU6CfLf6CNO8H7IWoS4=
 github.com/fsnotify/fsnotify v1.4.9/go.mod h1:znqG4EE+3YCdAaPaxE2ZRY/06pZUdp0tY4IgpuI1SZQ=
 github.com/gin-contrib/sse v0.1.0 h1:Y/yl/+YNO8GZSjAhjMsSuLt29uWRFHdHYUb5lYOV9qE=

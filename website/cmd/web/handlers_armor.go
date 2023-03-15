@@ -72,14 +72,7 @@ func convertNameFormat(name string) string {
 	return name
 }
 
-func EncodeImageToBase64(src ArmorImage) (dst string) {
-	// for _, image := range src {
-	// 	// Encode the image data as a base64-encoded string.
-	// 	encodedString := base64.StdEncoding.EncodeToString(image.Data)
-	// 	dst = append(dst, encodedString)
-	// }
-	// Encode the image data as a base64-encoded string.
+func EncodeImageToBase64(src models.ArmorImage) (dst string) {
 	dst = base64.StdEncoding.EncodeToString(src.Data)
-	// dst = append(dst, encodedString)
 	return dst
 }

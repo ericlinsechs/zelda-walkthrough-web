@@ -3,7 +3,7 @@ module github.com/ericlinsechs/zelda-walkthrough-web/website
 go 1.19
 
 require (
-	github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230314102130-20bfc7ce03e5
+	github.com/ericlinsechs/zelda-walkthrough-web/armor v0.0.0-20230315071817-32aa6b3bbd80
 	github.com/gin-gonic/gin v1.9.0
 )
 
