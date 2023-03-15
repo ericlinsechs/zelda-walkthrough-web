@@ -20,10 +20,11 @@ func (app *application) routes(r *gin.Engine) *gin.Engine {
 	r.DELETE("/api/armor/set/:id", app.deleteSet)
 
 	// Armor Image
-	// r.GET("/api/armor/image/", app.getAllSet)
+	r.GET("/api/armor/image/", app.getAllImage)
 	r.POST("/api/armor/image/", app.createImage)
 	r.GET("/api/armor/image/:id", app.findImage)
 	r.GET("/api/armor/image/name/:name", app.findImageByName)
 	r.POST("/api/armor/image/name/update", app.updateImageName)
+	r.DELETE("/api/armor/image/:id", app.deleteImage)
 	return r
 }

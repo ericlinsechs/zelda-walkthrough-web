@@ -6,61 +6,25 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type ArmorSet struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty"`
-	SetName  string             `bson:"setname,omitempty"`
-	Effect   string             `bson:"effect,omitempty"`
-	SetBonus string             `bson:"setbonus,omitempty"`
-	Tag      []string           `bson:"tag,omitempty"`
-	// CreatedOn   string             `bson:"createdOn,omitempty"`
-}
-type ArmorItem struct {
-	ID          primitive.ObjectID `bson:"_id,omitempty"`
-	SetName     string             `bson:"setname,omitempty"`
-	Name        string             `bson:"name,omitempty"`
-	HowToObtain string             `bson:"howtoobtain,omitempty"`
-	Url         string             `bson:"url,omitempty"`
-	ImageData   string             `bson:"imagedata,omitempty"`
-	Upgrade     UpgradeLevel       `bson:"upgrade,omitempty"`
-}
-
-type UpgradeLevel struct {
-	FirstUpgrade  UpgradeInfo `bson:"firstupgrade,omitempty"`
-	SecondUpgrade UpgradeInfo `bson:"secondupgrade,omitempty"`
-	ThirdUpgrade  UpgradeInfo `bson:"thirdupgrade,omitempty"`
-	FinalUpgrade  UpgradeInfo `bson:"finalupgrade,omitempty"`
-}
-type UpgradeInfo struct {
-	Bonus     string   `bson:"bonus,omitempty"`
-	Materials []string `bson:"materials,omitempty"`
-}
-
-type ArmorImage struct {
-	ID   primitive.ObjectID `bson:"_id,omitempty"`
-	Name string             `bson:"name"`
-	Data []byte             `bson:"data"`
-}
-
 type armorTemplateData struct {
-	ArmorSet    ArmorSet
-	ArmorSets   []ArmorSet
-	ArmorItem   ArmorItem
-	ArmorItems  []ArmorItem
-	ArmorImage  ArmorImage
-	ArmorImages []ArmorImage
+	ArmorSet    models.ArmorSet
+	ArmorSets   []models.ArmorSet
+	ArmorItem   models.ArmorItem
+	ArmorItems  []models.ArmorItem
+	ArmorImage  models.ArmorImage
+	ArmorImages []models.ArmorImage
 }
 
 func (app *application) armorList(c *gin.Context) {
-
 	// Get armor list from API
 	var atd armorTemplateData
 	app.infoLog.Println("Calling armor API...")
 	app.getAPIContent(app.apis.armorSet, &atd.ArmorSets)
-	app.infoLog.Println(atd.ArmorSets)
+	// app.infoLog.Println(atd.ArmorSets)
 
 	// Load template files
 	c.HTML(http.StatusOK, "armors/list", gin.H{
@@ -91,17 +55,14 @@ func (app *application) armorView(c *gin.Context) {
 		url = fmt.Sprintf("%s%s", app.apis.armorImage, convertNameFormat(atd.ArmorItems[i].Name))
 		app.infoLog.Printf("Calling api url: %s\n", url)
 		app.getAPIContent(url, &temp.ArmorImage)
-		// atd.ArmorImages = append(atd.ArmorImages, temp.ArmorImage)
+		// Convert image to base64 format
 		atd.ArmorItems[i].ImageData = EncodeImageToBase64(temp.ArmorImage)
 	}
-
-	// imageData := EncodeImageToBase64(atd.ArmorImages)
 
 	// Load template files
 	c.HTML(http.StatusOK, "armors/view", gin.H{
 		"SetName":    atd.ArmorItems[0].SetName,
 		"ArmorItems": atd.ArmorItems,
-		// "ArmorImages": imageData,
 	})
 }
 

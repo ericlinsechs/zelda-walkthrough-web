@@ -1,17 +1,24 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
 
 	"github.com/ericlinsechs/zelda-walkthrough-web/armor/pkg/models"
 	"github.com/gin-gonic/gin"
-	"go.mongodb.org/mongo-driver/bson"
 )
+
+func (app *application) getAllImage(c *gin.Context) {
+	results, err := app.armorImage.AllImage()
+	if err != nil {
+		app.serverError(c, err)
+	}
+
+	// Send response
+	c.JSON(http.StatusOK, results)
+}
 
 func (app *application) createImage(c *gin.Context) {
 	// get the uploaded file
@@ -117,24 +124,37 @@ func (app *application) updateImageName(c *gin.Context) {
 		app.serverError(c, err)
 	}
 
-	app.infoLog.Println(newImage)
+	// app.infoLog.Println(newImage)
+	newImage.Name = convertImageNameFormat(newImage.Name)
 
-	// Define the filter and update operations.
-	filter := bson.M{"_id": newImage.ID}
-	update := bson.M{"$set": bson.M{"name": newImage.Name}}
-
-	// Update the document.
-	result, err := app.armorImage.Collection.UpdateOne(context.Background(), filter, update)
+	// Delete user by id
+	result, err := app.armorImage.UpdateImage(newImage)
 	if err != nil {
-		// Handle the error.
+		app.serverError(c, err)
 	}
 
-	// Print the number of documents that were modified.
-	fmt.Printf("Updated %v documents.\n", result.ModifiedCount)
+	if result.MatchedCount != 0 {
+		app.infoLog.Println("matched and replaced an existing document")
+		return
+	}
+}
+
+func (app *application) deleteImage(c *gin.Context) {
+	// Get id from incoming url
+	id := c.Param("id")
+
+	// Delete user by id
+	deleteResult, err := app.armorImage.DeleteImage(id)
+	if err != nil {
+		app.serverError(c, err)
+	}
+
+	app.infoLog.Printf("%d image(s) have been eliminated", deleteResult.DeletedCount)
 }
 
 func convertImageNameFormat(name string) string {
 	name = strings.ReplaceAll(name, ".png", "")
+	name = strings.ReplaceAll(name, " ", "-")
 	name = strings.ToLower(name) // convert to lowercase
 	return name
 }

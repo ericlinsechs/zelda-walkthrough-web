@@ -18,6 +18,7 @@ type ArmorItem struct {
 	Name        string             `bson:"name,omitempty"`
 	HowToObtain string             `bson:"howtoobtain,omitempty"`
 	Url         string             `bson:"url,omitempty"`
+	ImageData   string             `bson:"imagedata,omitempty"`
 	Upgrade     UpgradeLevel       `bson:"upgrade,omitempty"`
 }
 

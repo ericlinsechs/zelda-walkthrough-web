@@ -1,0 +1,102 @@
+[  
+    {
+      "SetName": "Wild Set",    
+      "Name": "Cap of the Wild",    
+      "HowToObtain": "Complete all 120 Shrines and speak to the Old Man in the Forgotten Temple.",    "Url": "/wikis/the-legend-of-zelda-breath-of-the-wild/Cap_of_the_Wild",    "Upgrade": {      "FirstUpgrade": {        "Bonus": "+3 Defense",        "Materials": [          "10 Acorn",          "2 Farosh's Scale"        ]
+      },
+      "SecondUpgrade": {
+        "Bonus": "+5 Defense",
+        "Materials": [
+          "5 Courser Bee Honey",
+          "2 Farosh's Claw"
+        ]
+      },
+      "ThirdUpgrade": {
+        "Bonus": "+6 Defense",
+        "Materials": [
+          "5 Energetic Rhino Beetle",
+          "2 Farosh's Fang"
+        ]
+      },
+      "FinalUpgrade": {
+        "Bonus": "+10 Defense",
+        "Materials": [
+          "1 Star Fragment",
+          "2 Farosh's Horn"
+        ]
+      }
+    }
+  },
+  {
+    "SetName": "Wild Set",
+    "Name": "Trousers of the Wild",
+    "HowToObtain": "Complete all 120 Shrines and speak to the Old Man in the Forgotten Temple.",
+    "Url": "https://www.ign.com/wikis/the-legend-of-zelda-breath-of-the-wild/Trousers_of_the_Wild",
+    "Upgrade": {
+      "FirstUpgrade": {
+        "Bonus": "+3 Defense",
+        "Materials": [
+          "10 Acorn",
+          "2 Dinraal's Scale"
+        ]
+      },
+      "SecondUpgrade": {
+        "Bonus": "+5 Defense",
+        "Materials": [
+          "5 Courser Bee Honey",
+          "2 Dinraal's Claw"
+        ]
+      },
+      "ThirdUpgrade": {
+        "Bonus": "+6 Defense",
+        "Materials": [
+          "5 Energetic Rhino Beetle",
+          "2 Dinraal's Fang"
+        ]
+      },
+      "FinalUpgrade": {
+        "Bonus": "+10 Defense",
+        "Materials": [
+          "1 Star Fragment",
+          "2 Dinraal's Horn"
+        ]
+      }
+    }
+  },
+  {
+    "SetName": "Wild Set",
+    "Name": "Tunic of the Wild",
+    "HowToObtain": "Complete all 120 Shrines and speak to the Old Man in the Forgotten Temple.",
+    "Url": "/wikis/the-legend-of-zelda-breath-of-the-wild/Tunic_of_the_Wild",
+    "Upgrade": {
+      "FirstUpgrade": {
+        "Bonus": "+3 Defense",
+        "Materials": [
+          "10 Acorn",
+          "2 Naydra's Scale"
+        ]
+      },
+      "SecondUpgrade": {
+        "Bonus": "+5 Defense",
+        "Materials": [
+          "5 Courser Bee Honey",
+          "2 Naydra's Claw"
+        ]
+      },
+      "ThirdUpgrade": {
+        "Bonus": "+6 Defense",
+        "Materials": [
+            "5 Energetic Rhino Beetle",
+            "2 Naydra's Fang"
+        ]
+      },
+      "FinalUpgrade": {
+        "Bonus": "+10 Defense",
+        "Materials": [
+          "1 Star Fragment",
+          "2 Naydra's Horn"
+        ]
+      }
+    }
+  }
+]
